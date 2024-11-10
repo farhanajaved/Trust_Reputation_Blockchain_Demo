@@ -2,9 +2,8 @@
 
 This document provides a step-by-step explanation of how to run three scripts sequentially to register clients, submit weights, and update reputation scores in a decentralized learning environment on the Polygon test network.
 
-<img src="/home/fjaved/demos/hardhat-polygon/Sequence_diagram.png" alt="Sequential Workflow Diagram">
+<img src="/[home/fjaved/demos/hardhat-polygon/Sequence_diagram.png" alt="Sequential Workflow Diagram](https://github.com/farhanajaved/Trust_Reputation_Blockchain_Demo/blob/main/Sequence_diagram.png)">
 
-<img src="/home/fjaved/demos/hardhat-polygon/Demo_Reputation_Smart_Contract.pdf" alt="Sequential Workflow Diagram">
 
 ## Overview of the Scripts
 
