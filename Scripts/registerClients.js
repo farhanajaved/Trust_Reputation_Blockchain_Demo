@@ -10,9 +10,9 @@ const ora = require('ora');
 const chalk = require('chalk');
 const boxen = require('boxen');
 
-// CSV and Log file setup
+// CSV and Log file setup using environment variables
 const csvWriterInstance = createCsvWriter({
-    path: '/home/fjaved/demos/hardhat-polygon/test/test_FL/registration_50x1_log_demo.csv',
+    path: process.env.REGISTRATION_CSV_PATH || './registration_log_demo.csv',
     header: [
         { id: 'iteration', title: 'Iteration' },
         { id: 'address', title: 'Address' },
@@ -23,7 +23,7 @@ const csvWriterInstance = createCsvWriter({
         { id: 'batchSize', title: 'Batch Size' }
     ]
 });
-const logFilePath = '/home/fjaved/demos/hardhat-polygon/test/test_FL/registration_50x1_log_demo.txt';
+const logFilePath = process.env.LOG_FILE_PATH || './registration_log_demo.txt';
 
 function appendToLogFile(text) {
     fs.appendFileSync(logFilePath, text + '\n');
@@ -45,16 +45,14 @@ async function readPrivateKeys(filePath) {
                 console.log('Finished reading CSV.');
                 resolve(accounts);
             })
-            .on('error', (error) => {
-                reject(error);
-            });
+            .on('error', reject);
     });
 }
 
 async function main() {
     // Use Hardhat's provider
     const provider = ethers.provider;
-    
+
     // Fetch current gas price
     const gasPrice = await provider.getGasPrice();
     console.log(`Current Gas Price: ${ethers.utils.formatUnits(gasPrice, "gwei")} Gwei`);
@@ -76,7 +74,7 @@ async function main() {
     }
 
     // Read accounts from CSV
-    const accountsData = await readPrivateKeys('/home/fjaved/demos/hardhat-polygon/test/test_FL/accounts/accountsPolygon_FL_clients.csv');
+    const accountsData = await readPrivateKeys(process.env.ACCOUNTS_FILE_PATH || './accounts.csv');
     const accounts = accountsData.map(data => new ethers.Wallet(data.privateKey, provider));
 
     // Log each account's address and balance
@@ -85,11 +83,11 @@ async function main() {
         console.log(`Account: ${account.address} | Balance: ${ethers.utils.formatEther(balance)} ETH`);
     }
 
-    // Replace with your deployed contract address
-    const clientRegistrationAddress = '0x9b28Cc04BaEa94848a1241f26682aBE51e5B0b86';
+    // Contract address and ABI path from environment variables
+    const clientRegistrationAddress = process.env.CONTRACT_ADDRESS || '0xYourContractAddress';
     const clientRegistration = new ethers.Contract(
         clientRegistrationAddress,
-        JSON.parse(fs.readFileSync('/home/fjaved/demos/hardhat-polygon/artifacts/contracts/ClientRegistration.sol/ClientRegistration.json', 'utf8')).abi,
+        JSON.parse(fs.readFileSync(process.env.CONTRACT_ABI_PATH || './ClientRegistration.json', 'utf8')).abi,
         provider
     );
 
