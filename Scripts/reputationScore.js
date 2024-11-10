@@ -6,7 +6,7 @@ const cliProgress = require('cli-progress');
 const ora = require('ora');
 const chalk = require('chalk');
 const boxen = require('boxen');
-const io = require('socket.io')(3001); // Set up Socket.IO server on port 3001
+const io = require('socket.io')(process.env.SOCKET_PORT || 3001); // Set up Socket.IO server with customizable port
 
 // Setup CSV writer to save gas, latency, and transaction details for each round in real-time
 const csvHeader = [
@@ -19,13 +19,13 @@ const csvHeader = [
     { id: 'transactionCount', title: 'Transaction Count' }
 ];
 
-// Adding 50 separate columns for each client's reputation score
+// Adding columns for each client's reputation score (up to 50 clients as example)
 for (let i = 1; i <= 50; i++) {
     csvHeader.push({ id: `client${i}ReputationScore`, title: `Client ${i} Reputation Score` });
 }
 
 const writer = createCsvWriter({
-    path: '/home/fjaved/demos/hardhat-polygon/test/reputationscore/gas_latency_reputation_demo.csv',
+    path: process.env.CSV_OUTPUT_PATH || './gas_latency_reputation_demo.csv',
     header: csvHeader
 });
 
@@ -34,7 +34,7 @@ const reputationScores = []; // Array to track reputation scores for each round 
 
 async function main() {
     const ReputationContract = await ethers.getContractFactory("ReputationScore_onchain");
-    const reputation = await ReputationContract.attach('0xE8efc2A7B7C9Cb60222F09726999C95898b1f37C'); // Your deployed contract address
+    const reputation = await ReputationContract.attach(process.env.CONTRACT_ADDRESS || '0xYourContractAddress'); // Replace with environment variable
 
     // Set up progress bar with colors
     const progressBar = new cliProgress.SingleBar({
@@ -45,7 +45,7 @@ async function main() {
     });
 
     // Reading NMSE values from CSV
-    fs.createReadStream('/home/fjaved/demos/hardhat-polygon/FL_dataset/filtered_federated_learning_results.csv')
+    fs.createReadStream(process.env.INPUT_CSV_PATH || './filtered_federated_learning_results.csv')
         .pipe(csvParser())
         .on('data', (data) => results.push(data))
         .on('end', async () => {
@@ -127,7 +127,7 @@ async function main() {
                     // Emit round data to connected clients
                     io.emit('roundData', {
                         round: round + 1,
-                        gasUsed: parseInt(gasUsed),
+                        gasUsed: parseInt(gUsed),
                         latency: parseFloat(latency.toFixed(3)),
                         gasPrice: parseFloat(gasPrice),
                         reputationScores: clientReputationScores
