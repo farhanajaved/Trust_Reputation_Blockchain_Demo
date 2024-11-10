@@ -5,17 +5,17 @@ The proposed framework for our work is shown below:
 
 
 
-Building on the [MonB5G project](https://www.monb5g.eu), this work introduces a blockchain-based framework to support trustworthy federated learning (FL) in multi-stakeholder environments. As detailed in Barrachina et al. (2023) [^1], the FL setup in MonB5G involves client registration, local model training, NMSE evaluation, and aggregation of model updates to refine the global model.
+Building upon the [MonB5G project](https://www.monb5g.eu), this project introduces a blockchain-powered framework designed to establish trustworthy federated learning (FL) in multi-stakeholder environments. As described by Barrachina et al. (2023) [^1], the MonB5G FL setup includes essential stages such as client registration, local model training, NMSE evaluation, and model aggregation to improve the global model.
 
-To coordinate the FL process on the blockchain, we developed three smart contracts on the live Polygon testnet:
-- *registrationClient.sol* for onboarding authorized participants,
-- *weightSubmission.sol* for handling NMSE submissions with blockchain integrity, and
-- *reputationCalculation.sol* for computing reputation scores based on client contributions.
+To streamline the FL process on the blockchain, three smart contracts are deployed on the live Polygon testnet:
 
-Additionally, by utilizing Chainlink’s MockDataFetcher and a custom external adapter, we integrate external data sources by retrieving client data from a mock API and feeding it into *weightSubmission.sol*. The *reputationCalculation.sol* contract then selects the top 90% of performers for aggregating the global model in the next training round, ensuring high-quality contributions and enhancing transparency and trust through clearly defined, immutable selection criteria within the smart contracts.
+- **registration of Client**: Manages the onboarding of authorized participants.
+- **submisison of performace parametes**: Handles NMSE data submissions, preserving data integrity through blockchain.
+- **calculation of reputation**: Computes reputation scores for each participant based on their contributions.
 
+
+By leveraging Chainlink’s MockDataFetcher and a custom external adapter, we can integrate external data sources, retrieving client information from a mock API and passing it to *weightSubmission.sol*. Subsequently, *reputationCalculation.sol* selects the top 90% of participants for aggregation into the global model in the following training round, promoting high-quality contributions and enhancing transparency via immutable selection criteria coded in the smart contracts.
 Our smart contracts are integrated into a decentralized application (DApp) that provides interfaces for client registration, weight submission, and reputation score visualization.
-
 
 
 # Sequential Script Execution Workflow
