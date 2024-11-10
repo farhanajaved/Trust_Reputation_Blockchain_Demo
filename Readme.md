@@ -1,8 +1,32 @@
+
+# Introduction: 
+
+
+The proposed framework for our work can be accessed here: [Trustworthy Reputation for Federated Learning in O-RAN Leveraging Blockchain and Smart Contracts](https://github.com/farhanajaved/Trust_Reputation_Blockchain_Demo/blob/main/Trustworthy%20Reputation%20for%20Federated%20Learning%20in%20O-RAN%20Leveraging%20Blockchain%20and%20Smart%20Contracts.pdf).
+
+Building on the [MonB5G project](https://www.monb5g.eu), this work introduces a blockchain-based framework to support trustworthy federated learning (FL) in multi-stakeholder environments. As detailed in Barrachina et al. (2023) [^1], the FL setup in MonB5G involves client registration, local model training, NMSE evaluation, and aggregation of model updates to refine the global model.
+
+To coordinate the FL process on the blockchain, we developed three smart contracts on the live Polygon testnet:
+- *registrationClient.sol* for onboarding authorized participants,
+- *weightSubmission.sol* for handling NMSE submissions with blockchain integrity, and
+- *reputationCalculation.sol* for computing reputation scores based on client contributions.
+
+Additionally, by utilizing Chainlink’s MockDataFetcher and a custom external adapter, we integrate external data sources by retrieving client data from a mock API and feeding it into *weightSubmission.sol*. The *reputationCalculation.sol* contract then selects the top 90% of performers for aggregating the global model in the next training round, ensuring high-quality contributions and enhancing transparency and trust through clearly defined, immutable selection criteria within the smart contracts.
+
+Our smart contracts are integrated into a decentralized application (DApp) that provides interfaces for client registration, weight submission, and reputation score visualization.
+
+
+
 # Sequential Script Execution Workflow
 
 This document provides a step-by-step explanation of how to run three scripts sequentially to register clients, submit weights, and update reputation scores in a decentralized learning environment on the Polygon test network.
+![Sequence Diagram](https://github.com/farhanajaved/Trust_Reputation_Blockchain_Demo/blob/main/Sequence_diagram.png)
 
-<img src="/[home/fjaved/demos/hardhat-polygon/Sequence_diagram.png" alt="Sequential Workflow Diagram](https://github.com/farhanajaved/Trust_Reputation_Blockchain_Demo/blob/main/Sequence_diagram.png)">
+
+
+## Citation
+
+[^1]: Barrachina et al., "Cloud-enabled Federated Learning for Next-generation Communication Systems," *Journal/Conference Name*, 2023.
 
 
 ## Overview of the Scripts
