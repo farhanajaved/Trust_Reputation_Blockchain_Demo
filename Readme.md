@@ -27,7 +27,7 @@ This document provides a step-by-step explanation of how to run three scripts se
 
 ## Citation
 
-[^1]: Barrachina et al., "Cloud-enabled Federated Learning for Next-generation Communication Systems," *Journal/Conference Name*, 2023.
+[^1]: Barrachina-Muñoz, Sergio, et al. "Cloud native federated learning for streaming: An experimental demonstrator." 2023 IEEE 24th International Conference on High Performance Switching and Routing (HPSR). IEEE, 2023.
 
 
 ## Overview of the Scripts
@@ -51,7 +51,7 @@ This document provides a step-by-step explanation of how to run three scripts se
 
 ### Step 1: Run Registration Script
 ```bash
-npx hardhat run /home/fjaved/demos/hardhat-polygon/test/test_FL/Plots_FL/registeration/registerClients_v1_demo.js --network polygon
+npx hardhat run path_to/registerClients_v1_demo.js --network polygon
 ```
 **What Happens Here**:
 - Registers all clients that will participate in the learning process.
@@ -60,7 +60,7 @@ npx hardhat run /home/fjaved/demos/hardhat-polygon/test/test_FL/Plots_FL/registe
 
 ### Step 2: Run Weight Submission Script
 ```bash
-npx hardhat run /home/fjaved/demos/hardhat-polygon/test/test_FL/weightSubmission/deploy_weightSubmission_demo.js --network polygon
+npx hardhat run path_to/deploy_weightSubmission_demo.js --network polygon
 ```
 **What Happens Here**:
 - Clients submit their training model weights in a decentralized manner.
@@ -70,7 +70,7 @@ npx hardhat run /home/fjaved/demos/hardhat-polygon/test/test_FL/weightSubmission
 
 ### Step 3: Run Reputation Update Script
 ```bash
-npx hardhat run /home/fjaved/demos/hardhat-polygon/test/reputationscore/reputationScore_onChain_v1_demo.js --network polygon
+npx hardhat run path_to/reputationScore_onChain_v1_demo.js --network polygon
 ```
 **What Happens Here**:
 - Calculates **reputation scores** for each client based on their weight submissions.
