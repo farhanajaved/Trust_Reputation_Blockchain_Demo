@@ -21,6 +21,8 @@ Our smart contracts are integrated into a decentralized application (DApp) that 
 # Sequential Script Execution Workflow
 
 This document provides a step-by-step explanation of how to run three scripts sequentially to register clients, submit weights, and update reputation scores in a decentralized learning environment on the Polygon test network.
+
+
 ![Sequence Diagram](https://github.com/farhanajaved/Trust_Reputation_Blockchain_Demo/blob/main/Sequence_diagram.png)
 
 
@@ -32,17 +34,17 @@ This document provides a step-by-step explanation of how to run three scripts se
 
 ## Overview of the Scripts
 
-### 1. Registration Script (`registerClients_v1_demo.js`)
+### 1. Registration Script (`registerClients.js`)
 - **Purpose**: Registers multiple clients on the blockchain.
 - **Process**: Creates accounts and stores them in the smart contract deployed on the Polygon test.
 - **Outcome**: A list of registered clients that can participate in the learning process.
 
-### 2. Weight Submission Script (`deploy_weightSubmission_demo.js`)
+### 2. Weight Submission Script (`weightSubmission.js`)
 - **Purpose**: Handles "weight submission" by registered clients.
 - **Process**: Clients submit their computed weights (e.g., model weights in a federated learning setup).
 - **Rounds**: The script runs multiple rounds of submissions. After the **first round**, the system processes the collected data before proceeding to the next step.
 
-### 3. Reputation Update Script (`reputationScore_onChain_v1_demo.js`)
+### 3. Reputation Update Script (`reputationScore.js`)
 - **Purpose**: Calculates and updates reputation scores for clients based on their weight submissions.
 - **Process**: Updates reputation scores on-chain, allowing for transparency and integrity in identifying top-performing clients.
 - **Outcome**: Top clients may receive greater weighting in future rounds, or poorly performing clients may be excluded.
@@ -51,7 +53,7 @@ This document provides a step-by-step explanation of how to run three scripts se
 
 ### Step 1: Run Registration Script
 ```bash
-npx hardhat run path_to/registerClients_v1_demo.js --network polygon
+npx hardhat run path_to/registerClients.js --network polygon
 ```
 **What Happens Here**:
 - Registers all clients that will participate in the learning process.
@@ -60,7 +62,7 @@ npx hardhat run path_to/registerClients_v1_demo.js --network polygon
 
 ### Step 2: Run Weight Submission Script
 ```bash
-npx hardhat run path_to/deploy_weightSubmission_demo.js --network polygon
+npx hardhat run path_to/weightSubmission.js --network polygon
 ```
 **What Happens Here**:
 - Clients submit their training model weights in a decentralized manner.
@@ -70,7 +72,7 @@ npx hardhat run path_to/deploy_weightSubmission_demo.js --network polygon
 
 ### Step 3: Run Reputation Update Script
 ```bash
-npx hardhat run path_to/reputationScore_onChain_v1_demo.js --network polygon
+npx hardhat run path_to/reputationScore_onChain.js --network polygon
 ```
 **What Happens Here**:
 - Calculates **reputation scores** for each client based on their weight submissions.
