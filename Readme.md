@@ -1,6 +1,8 @@
-
 # Introduction: 
-The proposed framework for our work can be accessed here: [Trustworthy Reputation for Federated Learning Using Blockchain and Smart Contracts: Framework](https://github.com/farhanajaved/Trust_Reputation_Blockchain_Demo/blob/main/Trust_FL_Blockchain_Framework.png).
+The proposed framework for our work is shown below:
+
+![Trustworthy Reputation for Federated Learning Using Blockchain and Smart Contracts: Framework](https://github.com/farhanajaved/Trust_Reputation_Blockchain_Demo/blob/main/Trust_FL_Blockchain_Framework.png)
+
 
 
 Building on the [MonB5G project](https://www.monb5g.eu), this work introduces a blockchain-based framework to support trustworthy federated learning (FL) in multi-stakeholder environments. As detailed in Barrachina et al. (2023) [^1], the FL setup in MonB5G involves client registration, local model training, NMSE evaluation, and aggregation of model updates to refine the global model.
